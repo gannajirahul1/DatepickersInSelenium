@@ -1,0 +1,100 @@
+package DatePickers;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Calender {
+
+	public static void main(String[] args) throws InterruptedException {
+	//handling date Pickers
+		ChromeDriver driver=new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("https://jqueryui.com/datepicker/");
+		driver.manage().window().maximize();
+		//switching to frame
+		driver.switchTo().frame(0);
+		//clicking on date picker
+		//driver.findElement(By.xpath("//input[@id='datepicker']")).click();
+		//method-1 sending keys
+		//driver.findElement(By.xpath("//input[@id='datepicker']")).sendKeys("29/08/2002");
+		
+		/*
+		//select Month and year in increasing order
+		//note:while entering the String details please mention how the names there in webpage
+		driver.findElement(By.xpath("//input[@id='datepicker']")).click();
+		
+		String year="2025";
+		String month="August";
+		
+		while(true)
+		{
+			String curMonth=driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+			String curYear=driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+			if(curMonth.equals(month)&&curYear.equals(year))
+			{
+				break;
+			}
+			driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
+		}
+		*/
+	
+		/*
+		//select Month and year in reverse order
+		//note:while entering the String details please mention how the names there in webpage
+		driver.findElement(By.xpath("//input[@id='datepicker']")).click();
+		
+		String year="2022";
+		String month="August";
+		
+		while(true)
+		{
+			String curMonth=driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+			String curYear=driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+			if(curMonth.equals(month)&&curYear.equals(year))
+			{
+				break;
+			}
+			driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
+		}
+		*/
+		
+		//selecting the date
+		driver.findElement(By.xpath("//input[@id='datepicker']")).click();
+		
+		String date="5";
+		String year="2022";
+		String month="August";
+		
+		while(true)
+		{
+			String curMonth=driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+			String curYear=driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+			if(curMonth.equals(month)&&curYear.equals(year))
+			{
+				break;
+			}
+			driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
+		}
+		
+		List<WebElement>allDates=driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']//tbody//tr//td//a"));
+		for(WebElement dates:allDates)
+		{
+			if(dates.getText().equals(date))
+			{
+				dates.click();
+				break;
+			}
+		}
+		
+		
+		
+		Thread.sleep(5000);
+		driver.quit();
+
+	}
+
+}
